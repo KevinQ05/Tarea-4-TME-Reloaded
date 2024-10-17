@@ -1,5 +1,5 @@
 import numpy as np
-from simplex_tme import metodo_simplex_talegon, pretty_print
+from simplex_tme import metodo_simplex_talegon
 
 
 def main():
