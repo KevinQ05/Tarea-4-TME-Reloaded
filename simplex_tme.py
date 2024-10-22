@@ -88,7 +88,6 @@ def metodo_simplex_revisado(basis: SimplexBasis, verbose=False) -> dict:
         pretty_print(iteracion, basis)
     # si todos los costos reducidos son negativos o cero, es una solución óptima
     if all(c <= 0 for c in iteracion.c_red[0]):
-        pretty_print(iteracion, basis)
         return {"iter": iteracion, "basis": basis}
 
     m, _ = basis.A.shape
@@ -193,10 +192,10 @@ def metodo_simplex_talegon(c: Array, A_eq: Array, b_eq: Array, bounds: list[tupl
     # FASE 2 EL MERO METODO SIMPLEX REVISADO CON LA SOLUCION BASICA FACTIBLE ENCONTRADA
     phase_2_basis = new_basis.copy()
 
-    phase_2_basis.c = np.zeros((phase_2_basis.A.shape[1], 1))
-    for idx in phase_2_basis.variable_loc:
-        if idx in range(c.shape[0]):
-            phase_2_basis.c[phase_2_basis.variable_loc.index(idx)] = c[idx]
+    phase_2_basis.c = np.zeros((len(phase_2_basis.variable_loc), 1))
+    for var in phase_2_basis.variable_loc:
+        if var in range(c.shape[0]):
+            phase_2_basis.c[phase_2_basis.variable_loc.index(var)] = c[var]
 
     return metodo_simplex_revisado(phase_2_basis)
 

@@ -1,5 +1,5 @@
 import numpy as np
-from simplex_tme import metodo_simplex_talegon
+from simplex_tme import metodo_simplex_talegon, pretty_print
 
 
 def main():
@@ -11,6 +11,7 @@ def main():
 
     res = (metodo_simplex_talegon(c=c, A_eq=A_eq, b_eq=b_eq,
                                   bounds=bounds, verbose=True))
+    pretty_print(res["iter"], res["basis"])
 
 
 if __name__ == '__main__':
